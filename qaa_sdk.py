@@ -5,7 +5,7 @@ import unittest
 
 API_ADDR = 'http://localhost:5000'
 WEB_DOMAIN = 'http://localhost'
-API_TOKEN = '6ccdd8eb365242c29e1da2caea083461'
+API_TOKEN = '48f6011f8803498db4468a4f32ed7140'
 
 
 def set_result(test_results: unittest.TestResult, **kwargs):
@@ -14,11 +14,6 @@ def set_result(test_results: unittest.TestResult, **kwargs):
     :param test_results: unittest.TestResult
     :return:
     """
-
-    run_time = kwargs.get('run_time', 0)
-    version = kwargs.get('version', '0.0.0.0')
-    tag = kwargs.get('tag', 'default')
-
     total = test_results.testsRun
     failures = len(test_results.failures)
     errors = len(test_results.errors)
@@ -32,11 +27,9 @@ def set_result(test_results: unittest.TestResult, **kwargs):
         failures=failures,
         errors=errors,
         success=success,
-        skipped=skipped,
-        run_time=run_time,
-        version=version,
-        tag=tag
+        skipped=skipped
     )
+    res_dict.update(kwargs)
 
     # traceback
     failure_list = []  # 失败的内容
@@ -85,9 +78,9 @@ class TestReport(object):
         :param test_results: unittest.TestResult
         :return:
         """
-        run_time = time.time() - self.start_time
-        url = '%s/test-result/upload?token=%s' % (self.base_url, self.token)
-        res = requests.post(url, json=set_result(test_results, run_time=run_time, **kwargs))
+        duration = time.time() - self.start_time
+        url = '%s/api/test-result/upload?token=%s' % (self.base_url, self.token)
+        res = requests.post(url, json=set_result(test_results, duration=duration, **kwargs))
         res_dict = json.loads(res.text)
         return res_dict
 

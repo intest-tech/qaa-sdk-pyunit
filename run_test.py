@@ -48,5 +48,5 @@ if __name__ == '__main__':
     suite.addTest(DemoTestCase('test_skip'))
     runner = unittest.TextTestRunner()
     result = runner.run(suite)
-    upload_result = qaa_reporter.post(result, version='18.0.0.1')
+    upload_result = qaa_reporter.post(result, version='18.9.26.1', stage='接口测试', tag='local')
     print(upload_result)
