@@ -5,7 +5,6 @@ class DemoTestCase(unittest.TestCase):
     def test_pass(self):
         """
         test_pass
-        :return: 
         """
         a = 1
         self.assertEqual(1, a, msg='not match')
@@ -14,7 +13,6 @@ class DemoTestCase(unittest.TestCase):
         """
          stest_fail sad sf
          asdf safd
-         :return:
         """
         a = 1
         self.assertEqual(2, a, msg='not match')
@@ -22,7 +20,6 @@ class DemoTestCase(unittest.TestCase):
     def test_error(self):
         """
         test_error s
-        :return: 
         """
         a = {'a': 1}
         a.print
@@ -32,7 +29,6 @@ class DemoTestCase(unittest.TestCase):
     def test_skip(self):
         """
         test_skip
-        :return: 
         """
         a = 1
         self.assertEqual(1, a, msg='not match')
