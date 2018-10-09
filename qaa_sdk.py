@@ -80,7 +80,7 @@ class TestReport(object):
         """
         duration = time.time() - self.start_time
         url = '%s/api/test-result/upload?token=%s' % (self.base_url, self.token)
-        res = requests.post(url, json=set_result(test_results, duration=duration, **kwargs))
+        res = requests.post(url, json=set_result(test_results, duration=round(duration, 3), **kwargs))
         res_dict = json.loads(res.text)
         return res_dict
 
